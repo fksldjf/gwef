@@ -26,24 +26,89 @@ img {
 
 /* =========================
    네가 조정할 핵심값
+   - 오버레이 좌표는 banner.png(1080x6353)에서
+     실측한 버튼 박스에 맞춰 보정됨
    ========================= */
 :root {
   /* 배너 최대폭 */
   --banner-max-width: 1200px;
 
-  /* 오버레이 공통 크기: 한번에 조정 */
-  --overlay-left: 9%;
-  --overlay-width: 82%;
-  --overlay-height: 1.9%;
+  /* 오버레이 공통 크기 (실측값) */
+  --overlay-left: 10.46%;
+  --overlay-width: 79.82%;
+  --overlay-height: 1.76%;
 
-  /* 각 버튼 위치: 따로 조정 */
-  --kakao-top-1: 17.3%;
-  --phone-top-1: 19.5%;
-  --kakao-top-2: 91.55%;
-  --phone-top-2: 93.7%;
+  /* 각 버튼 위치 (실측값) */
+  --kakao-top-1: 15.62%;
+  --phone-top-1: 17.79%;
+  --kakao-top-2: 90.86%;
+  --phone-top-2: 93.03%;
 
   /* 하단바 높이 */
   --bottom-bar-height: 70px;
+}
+
+/* =========================
+   Site Header (분리된 헤더)
+   - 로고를 banner.png 와 분리해서
+     별도 <img> 요소로 노출 (구글 크롤러 인식용)
+   ========================= */
+.site-header {
+  width: 100%;
+  background: #ffffff;
+  position: relative;
+  z-index: 50;
+}
+
+.site-header-inner {
+  width: 100%;
+  max-width: var(--banner-max-width);
+  margin: 0 auto;
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.site-logo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.site-logo-img {
+  width: 60px;
+  height: 60px;
+  max-width: 60px;
+  display: block;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.site-brand-img {
+  height: 42px;
+  width: auto;
+  max-width: none;
+  display: block;
+  flex-shrink: 0;
+}
+
+.site-header-right {
+  display: flex;
+  align-items: center;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.site-search-hint {
+  height: 44px;
+  width: auto;
+  max-width: 100%;
+  display: block;
+  object-fit: contain;
 }
 
 /* 전체 */
@@ -176,6 +241,24 @@ img {
   .bottom-btn {
     font-size: 18px;
   }
+
+  .site-header-inner {
+    padding: 14px 20px;
+  }
+
+  .site-logo-img {
+    width: 52px;
+    height: 52px;
+    max-width: 52px;
+  }
+
+  .site-brand-img {
+    height: 36px;
+  }
+
+  .site-search-hint {
+    height: 38px;
+  }
 }
 
 /* 모바일 */
@@ -198,14 +281,54 @@ img {
     width: 20px;
     height: 20px;
   }
+
+  .site-header-inner {
+    padding: 10px 14px;
+    gap: 10px;
+  }
+
+  .site-logo-img {
+    width: 42px;
+    height: 42px;
+    max-width: 42px;
+  }
+
+  .site-brand-img {
+    height: 30px;
+  }
+
+  .site-search-hint {
+    height: 32px;
+  }
 }
 
-/* 작은 모바일 */
+/* 작은 모바일 - 검색창 숨김 */
+@media (max-width: 480px) {
+  .site-header-right {
+    display: none;
+  }
+
+  .site-header-inner {
+    justify-content: flex-start;
+  }
+}
+
 @media (max-width: 420px) {
   .bottom-btn {
     font-size: 15px;
   }
+
+  .site-logo-img {
+    width: 38px;
+    height: 38px;
+    max-width: 38px;
+  }
+
+  .site-brand-img {
+    height: 26px;
+  }
 }
+
 .sr-only {
   position: absolute;
   width: 1px;
